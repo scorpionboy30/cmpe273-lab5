@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.yammer.dropwizard.jersey.params.LongParam;
+
 import edu.sjsu.cmpe.library.domain.Book;
+import edu.sjsu.cmpe.library.domain.Book.Status;
 
 public class BookRepository implements BookRepositoryInterface {
     /** In-memory map to store books. (Key, Value) -> (ISBN, Book) */
@@ -105,5 +108,12 @@ public class BookRepository implements BookRepositoryInterface {
     public void delete(Long isbn) {
 	bookInMemoryMap.remove(isbn);
     }
+
+	@Override
+	public void updateBookStatus(LongParam isbn, Status status) {
+		Book book = getBookByISBN(isbn.get());
+		book.setStatus(status);
+		bookInMemoryMap.put(isbn.get(), book);
+	}
 
 }

@@ -2,7 +2,10 @@ package edu.sjsu.cmpe.library.repository;
 
 import java.util.List;
 
+import com.yammer.dropwizard.jersey.params.LongParam;
+
 import edu.sjsu.cmpe.library.domain.Book;
+import edu.sjsu.cmpe.library.domain.Book.Status;
 
 /**
  * Book repository interface.
@@ -36,6 +39,16 @@ public interface BookRepositoryInterface {
      * @return a list of books
      */
     List<Book> getAllBooks();
+    
+    /*
+     * Update status of a book by its isbn
+     * @param isbn
+     *            an ISBN of the book to be deleted
+     * @param status
+     *            an status to be updated
+     */
+    
+    public void updateBookStatus(LongParam isbn,Status status);
 
     /**
      * Delete an existing book
